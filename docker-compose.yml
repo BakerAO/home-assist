@@ -10,4 +10,5 @@ services:
     restart: unless-stopped
     privileged: true
     network_mode: host
-    device: /dev/ttyUSB0:/dev/ttyUSB0
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
