@@ -15,6 +15,23 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /opt/portainer:/data
 
+  zwave-js-ui:
+    container_name: zwave-js-ui
+    image: zwavejs/zwave-js-ui:latest
+    restart: unless-stopped
+    tty: true
+    stop_signal: SIGINT
+    environment:
+      - SESSION_SECRET=my-key-567
+      - ZWAVEJS_EXTERNAL_CONFIG=/usr/src/app/store/.config-db
+    devices:
+      - '/dev/serial/by-id/usb-Silicon_Labs_CP2102N_USB_to_UART_Bridge_Controller_f6b2aa271987ec11901be33719c2d21c-if00-port0:/dev/zwave'
+    volumes:
+      - /opt/zwave-js-ui:/usr/src/app/store
+    ports:
+      - "8091:8091" # port for web interface
+      - "3000:3000" # port for Z-Wave JS websocket server
+
   homeassistant:
     container_name: homeassistant
     image: 'ghcr.io/home-assistant/home-assistant:stable'
