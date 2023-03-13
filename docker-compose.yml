@@ -27,6 +27,7 @@ services:
     devices:
       - '/dev/serial/by-id/usb-Silicon_Labs_CP2102N_USB_to_UART_Bridge_Controller_f6b2aa271987ec11901be33719c2d21c-if00-port0:/dev/zwave'
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - /opt/zwave-js-ui:/usr/src/app/store
     ports:
       - "8091:8091" # port for web interface
